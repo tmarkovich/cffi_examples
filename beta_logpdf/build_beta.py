@@ -2,17 +2,18 @@ import os
 import cffi
 
 ffibuilder = cffi.FFI()
-sourcefile = 'beta.h'
+header = 'beta.h'
 source = 'beta.c'
 
-with open(sourcefile) as f:
-    ffibuilder.cdef(f.read())
+with open(header) as f:
+    cdef = f.read()
+
+ffibuilder.cdef(cdef)
 
 ffibuilder.set_source(
     '_beta',
-    '#include "{0}"'.format(sourcefile),
+    cdef,
     sources=[source],
-    include_dirs=['.'],
     extra_compile_args=['-O3', '-march=native', '-ffast-math'])
 
 ffibuilder.compile(verbose=True)
