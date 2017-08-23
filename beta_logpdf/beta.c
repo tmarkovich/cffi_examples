@@ -9,7 +9,7 @@ double nop(double a, double b, double x){
 double beta_logpdf(double a, double b, double x){
   double prefactor;
   prefactor = lgamma(a + b) - (lgamma(a) + lgamma(b));
-  return prefactor + (a - 1.) * log(x) + (b - 1.) * log(x - 1.);
+  return prefactor + (a - 1.) * log(x) + (b - 1.) * log(1. - x);
 }
 
 int main(void){
