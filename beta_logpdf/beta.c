@@ -6,10 +6,17 @@ double nop(double a, double b, double x){
     return x;
 }
 
+double xlogy(double x, double y){
+  if(x == 0.0 || y == 0.0){
+    return 0.0;
+  }
+  return x * log(y);
+}
+
 double beta_logpdf(double a, double b, double x){
   double prefactor;
   prefactor = lgamma(a + b) - (lgamma(a) + lgamma(b));
-  return prefactor + (a - 1.) * log(x) + (b - 1.) * log(x - 1.);
+  return prefactor + xlogy(a - 1.0, x) + xlogy(b - 1.0, 1.0 - x);
 }
 
 int main(void){
